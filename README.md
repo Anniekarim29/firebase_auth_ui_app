@@ -1,16 +1,20 @@
-# user_auth_app
+# Firebase Auth UI App (Flutter)
 
-A new Flutter project.
+This Flutter app implements Firebase Authentication using Email & Password with a beautiful login/signup UI.
 
-## Getting Started
+##  Features
+- Firebase Auth Integration
+- Email + Password Signup & Login
+- Profile Page after Login
+- Attractive, rounded input design
+- Clean UI with deepPurple theming
 
-This project is a starting point for a Flutter application.
+##  Setup
+- Add your own `google-services.json` in `android/app/`
+- Run `flutter pub get`
+- Run `flutter run`
 
-A few resources to get you started if this is your first Flutter project:
+##  Firebase Features Used
+- Firebase Authentication
+- (Optionally) Firestore (next step)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
