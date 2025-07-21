@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'login_page.dart';
 import 'profile_page.dart';
 
@@ -14,10 +15,22 @@ class _SignupPageState extends State<SignupPage> {
 
   void signup() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      // 🔐 Create user in Firebase Auth
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+
+      // ✅ Save user info to Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'email': emailController.text.trim(),
+        'createdAt': Timestamp.now(),
+      });
+
+      // Navigate to profile screen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => ProfilePage()),
@@ -79,8 +92,7 @@ class _SignupPageState extends State<SignupPage> {
                 onPressed: signup,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
+                  padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                 ),
